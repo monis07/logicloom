@@ -50,25 +50,31 @@ router.get('/problems',authenticateJwt,(req:Request,res:Response)=>{
 
 
 //Particular problem
-router.get('/problems/:id',authenticateJwt,(req:Request,res:Response)=>{
+router.get('/problems/:id',(req:Request,res:Response)=>{
     const id = req.params.id;
     Problem.findById(id).then((problem)=>{
         res.status(200).json(problem)
     })
 })
 
-router.post('problems/:id/execute', async (req, res) => {
+router.post('/submit/problems/execute/:id', async (req, res) => {
+    console.log("Hi from execute route")
+    const finalresult:any=[];
     const frontendCode = req.body.code;
     const language = req.body.language;
-    const id:String=req.params.id;
+    const id=req.params.id;
         
-        const stdinput:any=Problem.findById(id).then((problem)=>{
+        const stdinput:any=await Problem.findById(id).then((problem)=>{
             const testcases=problem?.testcases;
             return testcases;
-        })
+        }).then(data=>data)
+        console.log(stdinput)
+
 
         for(let testCase of stdinput){
             const frontend_modified=`
+            import java.io.*;
+            import java.util.*;
             public class Main{
             ${frontendCode}
             public static void main(String args[]){
@@ -106,7 +112,7 @@ router.post('problems/:id/execute', async (req, res) => {
             console.log(newUrl);
 
             let status=null;
-            while(status!==3){
+            while(status==null || status===1 || status===2){
                 const options1 = {
                     method: 'GET',
                     url: newUrl,
@@ -118,7 +124,7 @@ router.post('problems/:id/execute', async (req, res) => {
                 const response1 = await axios.request(options1);
                 console.log(response1.data);
                 status=response1.data.status.id;
-                if(status===2){
+                if(status===1 || status===2){
                     await new Promise(resolve => setTimeout(resolve, 1000));
                     console.log("Waiting for 1 sec and then going again")
                 }
@@ -135,8 +141,15 @@ router.post('problems/:id/execute', async (req, res) => {
               }
                   const response1 = await axios.request(options1); 
                   console.log(response1.data);
+                  const output=response1.data.stdout.trim();
+                  const finalStatus=response1.data.status.description;
+                  const result={
+                    output:output,
+                    finalStatus:finalStatus,
+                    expectedOutput:testCase.expectedOutput
+                  }
+                  finalresult.push(result);
         }  
-        
-        
+        res.status(200).send(finalresult);        
     });
 export default router;
