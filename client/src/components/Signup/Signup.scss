@@ -1,0 +1,48 @@
+.app__signup{
+    display: flex;
+    flex-direction: column;
+    background-color: black;
+    height: 100vh;
+    justify-content: center;
+    align-items: center;
+
+    .app__signup-response{
+        font-size: 1.5rem;
+        margin:1rem;
+    }
+
+    .app__signup-details{
+        display: flex;
+        flex-direction: column;
+        border:1px solid white;
+        border-radius: 15px;
+        padding: 2.5rem;
+
+        input{
+            font-family: "GT";
+            padding: 0.8rem;
+            border-radius: 10px;
+            border:2px solid black;
+            font-size: 1rem;
+            outline:none;
+            // transition: 0.5s;
+            // --webkit-transition:0.5s;
+        }
+
+        input:focus{
+            border:3px solid var(--primary-color);
+        }
+
+        button{
+            font-family: "GT";
+            color:white;
+            background-color: var(--primary-color);
+            font-size: 1.1rem;
+            padding:1rem;
+            margin-top: 2rem;
+            margin-bottom: 1rem;
+            border: none;
+            border-radius: 12px;
+        }
+    }
+}
