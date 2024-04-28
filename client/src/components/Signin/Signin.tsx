@@ -2,10 +2,12 @@ import { useEffect, useState } from 'react'
 import { AiFillEye } from 'react-icons/ai'
 import './signin.scss'
 import axios from 'axios'
+import { useNavigate } from 'react-router-dom'
 
 function Signin(){
     const [isVisible,setIsVisible]=useState(false)
     const [msg,setMsg]=useState('') 
+    const navigate=useNavigate()
     const change=()=>{
         setIsVisible(!isVisible)
     }
@@ -40,7 +42,8 @@ function Signin(){
     const handleSignin=async()=>{
         try{
             const response=await axios.request(options)
-            setMsg(response.data)
+            localStorage.setItem('token',response.data.token)
+            navigate('/problems')
         }
         catch(error){
             setMsg('Invalid username or password')

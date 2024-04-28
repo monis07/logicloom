@@ -50,7 +50,7 @@ router.get('/problems',authenticateJwt,(req:Request,res:Response)=>{
 
 
 //Particular problem
-router.get('/problems/:id',(req:Request,res:Response)=>{
+router.get('/problems/:id',authenticateJwt,(req:Request,res:Response)=>{
     const id = req.params.id;
     Problem.findById(id).then((problem)=>{
         res.status(200).json(problem)

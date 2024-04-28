@@ -2,18 +2,21 @@ import mongoose from 'mongoose'
 
 const adminSchema=new mongoose.Schema({
     username:String,
-    password:String
+    password:String,
+    problem:[{
+        _id:mongoose.Schema.Types.ObjectId,
+        status:{type:String,default:"Not Solved"},
+        code:{type:String,default:""}
+    }]
 })
 
 const problemSchema =new mongoose.Schema({
-    status:Boolean,
     title:String,
     difficulty:String,
     description:String,
     codeSnippet:String,
     testcases:[{
-        nums:Array,
-        target:Number,
+        input:Object,
         expectedOutput:String
     }]
 })

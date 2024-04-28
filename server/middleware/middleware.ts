@@ -14,6 +14,8 @@ export default function authenticateJwt(req:Request,res:Response,next:NextFuncti
                 next();
             }
         })
+    }else{
+        res.send("Unauthorised access!")
     }
 
 }
