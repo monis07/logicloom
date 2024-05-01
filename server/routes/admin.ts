@@ -60,8 +60,9 @@ router.get('/problems/:id',authenticateJwt,(req:Request,res:Response)=>{
 router.post('/submit/problems/execute/:id', async (req, res) => {
     console.log("Hi from execute route")
     const finalresult:any=[];
-    const frontendCode = req.body.code;
-    const language = req.body.language;
+    const frontendCode = req.body.code.code;
+    console.log(frontendCode)
+    const language = 62;
     const id=req.params.id;
         
         const stdinput:any=await Problem.findById(id).then((problem)=>{
@@ -78,12 +79,15 @@ router.post('/submit/problems/execute/:id', async (req, res) => {
             public class Main{
             ${frontendCode}
             public static void main(String args[]){
-            int a[]={${testCase.nums}};
-            int arr[]=twoSum(a,${testCase.target});
+            int a[]={${testCase.input.nums}};
+            int arr[]=twoSum(a,${testCase.input.target});
             String output=Arrays.toString(arr);
             System.out.println(output);
                 }
             }`
+
+            console.log(frontend_modified);
+            
 
             const frontend_encoded:String=btoa(frontend_modified);
 
@@ -105,9 +109,15 @@ router.post('/submit/problems/execute/:id', async (req, res) => {
                   source_code: frontend_encoded,
                 }
               };
-            const response = await axios.request(options);
-            console.log("Token is="+response.data.token);
 
+              try{
+                let response = await axios.request(options);
+                console.log("Token is="+response.data.token);
+              }
+              catch(error){
+                console.error("Error while fetching token="+error)
+              }
+                
             const newUrl='https://judge0-ce.p.rapidapi.com/submissions/'+response.data.token;
             console.log(newUrl);
 
@@ -144,12 +154,13 @@ router.post('/submit/problems/execute/:id', async (req, res) => {
                   const output=response1.data.stdout.trim();
                   const finalStatus=response1.data.status.description;
                   const result={
+                    input:testCase.input,
                     output:output,
                     finalStatus:finalStatus,
                     expectedOutput:testCase.expectedOutput
                   }
                   finalresult.push(result);
         }  
-        res.status(200).send(finalresult);        
+         res.status(200).send(finalresult);        
     });
 export default router;
