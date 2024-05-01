@@ -1,6 +1,7 @@
 import { useState,useEffect } from 'react'
 import './problems.scss'
 import axios from 'axios'
+import Navbar from '../Navbar/Navbar'
 
 function Problems(){
     const [problems,setProblems]=useState([])
@@ -23,9 +24,9 @@ function Problems(){
     
     return(
         <>
+        <Navbar></Navbar>
         <table>
             <thead>
-                <th>Status</th>
                 <th>Title</th>
                 <th>Difficulty</th>
             </thead>
@@ -47,7 +48,6 @@ function Child(props:{title:string,difficulty:string,_id:string}){
     const enum colour{Easy="green",Medium="yellow",Hard="red"}
     return(
         <tr>
-            <td>Not solved</td>
             <td><a href={id}>{props.title}</a></td>
             <td style={{color: colour[props.difficulty]}}>{props.difficulty}</td>
         </tr>

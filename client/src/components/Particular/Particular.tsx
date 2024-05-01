@@ -2,6 +2,7 @@ import { useState,useEffect } from 'react'
 import './particular.scss'
 import axios from 'axios'
 import { useParams } from 'react-router-dom'
+import Navbar from '../Navbar/Navbar'
 
 function Particular(){
     const [problem,setProblem]=useState({})
@@ -25,7 +26,6 @@ function Particular(){
             }
             const response=await axios.request(options)
             setProblem(response.data)
-            console.log(response.data.testcases)
             setTestcases(response.data.testcases)
         }
         catch(error){
@@ -44,15 +44,17 @@ function Particular(){
                 }
                 }
         
-                const response= await axios.request(options)
-                response.then((data)=>{
-                    setData(data.data)
-                    console.log(data)
-                })
-                setStatus("Submit")
+                const response = await axios.request(options);
+
+                if(response.data.length>0)
+                setData(response.data)
+            else{
+                alert("There is some error in your code")
+            }
+                setStatus("Submit");
         }
         catch(error){
-            console.log("Error while submitting problem is="+error)
+            console.error("Error while submitting problem is="+error)
             setStatus("Submit")
         }
      }
@@ -60,24 +62,24 @@ function Particular(){
 
     const handlecodeChange=(e:React.ChangeEvent<HTMLTextAreaElement>)=>{
         setCode(e.target.value)
-        console.log(code);
-        console.log(problem.codeSnippet)
     }
 
-    const combinedProps = [
-        ...testcases.map((testcase: { input: object }) => ({
-          input: testcase.input
-        })),
-        ...data.map((d: { output: string,expectedOutput: string,input:object
-        }) => ({
-          input:d.input,
-          output: d.output,
-          expectedOutput: d.expectedOutput
-        }))
-      ];
-      console.log(combinedProps)
+
+       const combinedProps = [
+            ...testcases.map((testcase: { input: object }) => ({
+              input: testcase.input
+            })),
+            ...data.map((d: { output: string,expectedOutput: string,input:object
+            }) => ({
+              input:d.input,
+              output: d.output,
+              expectedOutput: d.expectedOutput
+            }))
+          ];
+    
     return(
         <>
+        <Navbar></Navbar>
         <div className='app__particular'>
         <div className="app__particular-container">
             <div className='app__particular-info1'>
@@ -126,16 +128,16 @@ function Particular(){
 
 function Child(props){
     const input=JSON.stringify(props.input)
-    console.log(input)
-    if(props.output !== undefined)
+    const modifiedInput = input.substring(1, input.length - 1);
+    if(props.output)
         {
             return(
                 <>
                 <tr>
-                    <td>{input}</td>
+                    <td>{modifiedInput}</td>
                     <td>{props.expectedOutput}</td>
                     <td>{props.output}</td>
-                    <td>{props.output == props.expectedOutput ? "Accepted" : "Wrong Answer"}</td>
+                    <td style={{color:props.output == props.expectedOutput ? "green" : "red"}}>{props.output == props.expectedOutput ? "Accepted" : "Wrong Answer"}</td>
                 </tr>
                 </>
             )
