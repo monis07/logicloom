@@ -83,16 +83,16 @@ function Particular(){
         <div className='app__particular'>
         <div className="app__particular-container">
             <div className='app__particular-info1'>
-                <h1>{problem.title}</h1>
-                <pre>{problem.description}</pre>
+                <h1>{(problem as { title: string }).title}</h1>
+                <pre>{(problem as { description: string }).description}</pre>
                 <br />
                 <pre>Note: If code snippet is not displayed in the code editor. Use this! Else it will not work</pre>
-                <pre>Code Snippet: {problem.codeSnippet}</pre>
+                <pre>Code Snippet: {(problem as {codeSnippet:string}).codeSnippet}</pre>
             </div>
             <div className='app__particular-info2'>
                 <div className='code'>
                     <h2>Code Editor(Java)</h2>
-                <textarea onChange={handlecodeChange}>{problem.codeSnippet}</textarea>
+                <textarea onChange={handlecodeChange}>{(problem as {codeSnippet:string}).codeSnippet}</textarea>
                 </div>
                 <div className='testcase'>
                     <h2>Testcases</h2>
