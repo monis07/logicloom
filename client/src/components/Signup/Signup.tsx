@@ -29,7 +29,7 @@ function SignUp(){
     },[username,password,cursor]);
     const options={
         method:'POST',
-        url:'http://localhost:3000/admin/signup',
+        url:'https://logicloom-server.vercel.app/admin/signup',
         data:{
             username:username,
             password:password

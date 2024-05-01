@@ -11,7 +11,7 @@ function Problems(){
     const fetchProblems = async()=>{
         const options={
             method:'GET',
-            url:'http://localhost:3000/admin/problems',
+            url:'https://logicloom-server.vercel.app/admin/problems',
             headers:{
                 'Content-Type':'application/json',
                 authorization:localStorage.getItem('token')
