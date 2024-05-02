@@ -38,6 +38,10 @@ function Particular(){
             const options={
                 method:'POST',
                 url:API_URL+'/admin/submit/problems/execute/'+id,
+                headers:{
+                    'Content-Type':'application/json',
+                    authorization:localStorage.getItem('token')
+                },
                 data:{
                     code:{code}
                 }
