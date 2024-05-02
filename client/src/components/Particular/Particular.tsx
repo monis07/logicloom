@@ -126,22 +126,29 @@ function Particular(){
 
 }
 
-function Child(props){
-    const input=JSON.stringify(props.input)
+interface ChildProps {
+    input: object;
+    output?: string;
+    expectedOutput?: string;
+}
+
+function Child(props: ChildProps) {
+    const input = JSON.stringify(props.input);
     const modifiedInput = input.substring(1, input.length - 1);
-    if(props.output)
-        {
-            return(
-                <>
+    if (props.output) {
+        return (
+            <>
                 <tr>
                     <td>{modifiedInput}</td>
                     <td>{props.expectedOutput}</td>
                     <td>{props.output}</td>
-                    <td style={{color:props.output == props.expectedOutput ? "green" : "red"}}>{props.output == props.expectedOutput ? "Accepted" : "Wrong Answer"}</td>
+                    <td style={{ color: props.output === props.expectedOutput ? "green" : "red" }}>
+                        {props.output === props.expectedOutput ? "Accepted" : "Wrong Answer"}
+                    </td>
                 </tr>
-                </>
-            )
-        }
+            </>
+        );
+    }
 }
 
 export default Particular;
