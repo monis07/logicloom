@@ -3,6 +3,7 @@ import { AiFillEye } from 'react-icons/ai'
 import './signin.scss'
 import axios from 'axios'
 import { useNavigate } from 'react-router-dom'
+import API_URL from '../../config'
 
 function Signin(){
     const [isVisible,setIsVisible]=useState(false)
@@ -31,7 +32,7 @@ function Signin(){
     },[username,password,cursor]);
     const options={
         method:'POST',
-        url:'https://leetcode-clone-jxe8.onrender.com/admin/signin',
+        url:API_URL+'/admin/signin',
         data:{
             username:username,
             password:password

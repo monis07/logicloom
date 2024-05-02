@@ -3,6 +3,7 @@ import './particular.scss'
 import axios from 'axios'
 import { useParams } from 'react-router-dom'
 import Navbar from '../Navbar/Navbar'
+import API_URL from '../../config'
 
 function Particular(){
     const [problem,setProblem]=useState({})
@@ -17,7 +18,7 @@ function Particular(){
         try{
             const options={
                 method:'GET',
-                url:'https://leetcode-clone-jxe8.onrender.com/admin/problems/'+id,
+                url:API_URL+'/admin/problems/'+id,
                 headers:{
                     'Content-Type':'application/json',
                     authorization:localStorage.getItem('token')
@@ -36,7 +37,7 @@ function Particular(){
         try{
             const options={
                 method:'POST',
-                url:'https://leetcode-clone-jxe8.onrender.com/admin/submit/problems/execute/'+id,
+                url:API_URL+'/admin/submit/problems/execute/'+id,
                 data:{
                     code:{code}
                 }

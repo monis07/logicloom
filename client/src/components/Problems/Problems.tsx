@@ -2,6 +2,7 @@ import { useState,useEffect } from 'react'
 import './problems.scss'
 import axios from 'axios'
 import Navbar from '../Navbar/Navbar'
+import API_URL from '../../config'
 
 function Problems(){
     const [problems,setProblems]=useState([])
@@ -11,7 +12,7 @@ function Problems(){
     const fetchProblems = async()=>{
         const options={
             method:'GET',
-            url:'https://leetcode-clone-jxe8.onrender.com/admin/problems',
+            url:API_URL+'/admin/problems',
             headers:{
                 'Content-Type':'application/json',
                 authorization:localStorage.getItem('token')

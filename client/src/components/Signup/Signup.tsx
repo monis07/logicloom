@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react'
 import { AiFillEye } from 'react-icons/ai'
 import './Signup.scss'
 import axios from 'axios'
+import API_URL from '../../config'
 
 function SignUp(){
     const [isVisible,setIsVisible]=useState(false)
@@ -29,7 +30,7 @@ function SignUp(){
     },[username,password,cursor]);
     const options={
         method:'POST',
-        url:'https://leetcode-clone-jxe8.onrender.com/admin/signup',
+        url:API_URL+'/admin/signup',
         data:{
             username:username,
             password:password
