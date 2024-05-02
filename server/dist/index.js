@@ -9,6 +9,7 @@ const cors_1 = __importDefault(require("cors"));
 const body_parser_1 = __importDefault(require("body-parser"));
 const admin_1 = __importDefault(require("./routes/admin"));
 const port = 3000;
+const url = process.env.MONGO_DB_URL || '';
 const app = (0, express_1.default)();
 app.use(express_1.default.json());
 app.use(body_parser_1.default.json());
@@ -17,4 +18,4 @@ app.use('/admin', admin_1.default);
 app.listen(port, () => {
     console.log("Server is listening on port " + port);
 });
-mongoose_1.default.connect('mongodb+srv://monisazeem:monisazeem@cluster0.94aobgx.mongodb.net/', { dbName: 'leetcode-clone' });
+mongoose_1.default.connect(url, { dbName: 'leetcode-clone' });
