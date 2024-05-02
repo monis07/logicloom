@@ -11,10 +11,7 @@ const app=express();
 app.use(express.json());
 app.use(bodyparser.json())
 
-app.use(cors({
-    origin: 'https://logicloom-client.vercel.app',
-    credentials: true // If you're using credentials like cookies or Authorization header
-  })); 
+app.use(cors()); 
 app.use('/admin',adminRouter)
 
 app.listen(port,()=>{
