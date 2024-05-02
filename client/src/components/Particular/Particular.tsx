@@ -18,7 +18,7 @@ function Particular(){
         try{
             const options={
                 method:'GET',
-                url:'https://logicloom-server.vercel.app/admin/problems/'+id,
+                url:'https://leetcode-clone-jxe8.onrender.com/admin/problems/'+id,
                 headers:{
                     'Content-Type':'application/json',
                     authorization:localStorage.getItem('token')
@@ -38,7 +38,7 @@ function Particular(){
         try{
             const options={
                 method:'POST',
-                url:'https://logicloom-server.vercel.app/admin/submit/problems/execute/'+id,
+                url:'https://leetcode-clone-jxe8.onrender.com/admin/submit/problems/execute/'+id,
                 data:{
                     code:{code}
                 }

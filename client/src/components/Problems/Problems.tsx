@@ -11,7 +11,7 @@ function Problems(){
     const fetchProblems = async()=>{
         const options={
             method:'GET',
-            url:'https://logicloom-server.vercel.app/admin/problems',
+            url:'https://leetcode-clone-jxe8.onrender.com/admin/problems',
             headers:{
                 'Content-Type':'application/json',
                 authorization:localStorage.getItem('token')

@@ -29,7 +29,7 @@ function SignUp(){
     },[username,password,cursor]);
     const options={
         method:'POST',
-        url:'https://logicloom-server.vercel.app/admin/signup',
+        url:'https://leetcode-clone-jxe8.onrender.com/admin/signup',
         data:{
             username:username,
             password:password
