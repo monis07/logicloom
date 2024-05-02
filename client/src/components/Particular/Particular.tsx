@@ -7,7 +7,6 @@ import Navbar from '../Navbar/Navbar'
 function Particular(){
     const [problem,setProblem]=useState({})
     const [code,setCode]=useState("")
-    const [testcases, setTestcases] = useState([])
     const [status,setStatus]=useState("Submit")
     const [data,setData]=useState([])
     const {id}= useParams();
@@ -26,7 +25,6 @@ function Particular(){
             }
             const response=await axios.request(options)
             setProblem(response.data)
-            setTestcases(response.data.testcases)
         }
         catch(error){
             console.log("Error while fetching problems="+error);
@@ -46,8 +44,11 @@ function Particular(){
         
                 const response = await axios.request(options);
 
-                if(response.data.length>0)
-                setData(response.data)
+                if(response.data.length>0){
+                    setData(response.data)
+                    console.log("data aaya hai backend se")
+                    console.log(data)
+                }
             else{
                 alert("There is some error in your code")
             }
@@ -65,17 +66,7 @@ function Particular(){
     }
 
 
-       const combinedProps = [
-            ...testcases.map((testcase: { input: object }) => ({
-              input: testcase.input
-            })),
-            ...data.map((d: { output: string,expectedOutput: string,input:object
-            }) => ({
-              input:d.input,
-              output: d.output,
-              expectedOutput: d.expectedOutput
-            }))
-          ];
+       
     
     return(
         <>
@@ -98,21 +89,27 @@ function Particular(){
                     <h2>Testcases</h2>
                     <table>
                         <thead>
+                            <tr>
                             <th>Input</th>
                             <th>Expected Output</th>
                             <th>Output</th>
                             <th>Status</th>
+                            </tr>
                         </thead>
+                       {Array.isArray(data) && data.length>0 && (
                         <tbody>
-                             {combinedProps.map((props)=>(
-                                <Child {...props}/>
-                            ))}
-                            {/* {data.map((d:{output:string})=>(
-                                <Child output={d.output}/>
-                            ))} */}
+                            {
+                                data.map((d:{input:object,output:string,expectedOutput:string})=>(
+                                    <Child
+                                    input={d.input}
+                                    output={d.output}
+                                    expectedOutput={d.expectedOutput}
+                                    />
+                                ))
+                            }
                         </tbody>
+)}
                     </table>
-                    
                 </div>
             </div>
             </div>
@@ -126,24 +123,20 @@ function Particular(){
 
 }
 
-interface ChildProps {
-    input: object;
-    output?: string;
-    expectedOutput?: string;
-}
 
-function Child(props: ChildProps) {
-    const input = JSON.stringify(props.input);
-    const modifiedInput = input.substring(1, input.length - 1);
-    if (props.output) {
+
+function Child({input, output, expectedOutput}: {input: object, output: string, expectedOutput: string}) {
+    const input1 = JSON.stringify(input);
+    const modifiedInput = input1.substring(1, input1.length - 1);
+    if (output) {
         return (
             <>
                 <tr>
                     <td>{modifiedInput}</td>
-                    <td>{props.expectedOutput}</td>
-                    <td>{props.output}</td>
-                    <td style={{ color: props.output === props.expectedOutput ? "green" : "red" }}>
-                        {props.output === props.expectedOutput ? "Accepted" : "Wrong Answer"}
+                    <td>{expectedOutput}</td>
+                    <td>{output}</td>
+                    <td style={{ color: output === expectedOutput ? "green" : "red" }}>
+                        {output === expectedOutput ? "Accepted" : "Wrong Answer"}
                     </td>
                 </tr>
             </>
