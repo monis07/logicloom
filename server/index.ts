@@ -8,15 +8,15 @@ import adminRouter from './routes/admin'
 const port =3000
 
 const app=express();
-app.use(express.json());
-app.use(bodyparser.json())
 const corsOptions = {
     origin: 'https://logicloom-client.vercel.app', // Replace with your allowed origin
     methods: 'GET,POST',
     allowedHeaders: 'Content-Type,authorization',
 };
-
 app.use(cors(corsOptions));
+app.use(express.json());
+app.use(bodyparser.json())
+
 // app.use(cors({
 //     origin:'*'
 // }))
