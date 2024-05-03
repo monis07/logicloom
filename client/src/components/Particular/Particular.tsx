@@ -55,7 +55,7 @@ function Particular(){
                     console.log(data)
                 }
             else{
-                alert("There is some error in your code")
+                                alert("There is syntax,logical or runtime error in your code.Kindly fix it and try again!")
             }
                 setStatus("Submit");
         }
@@ -82,7 +82,7 @@ function Particular(){
                 <h1>{(problem as { title: string }).title}</h1>
                 <pre>{(problem as { description: string }).description}</pre>
                 <br />
-                <pre>Note: If code snippet is not displayed in the code editor. Use this! Else it will not work</pre>
+                <pre>NOTE: If code snippet is not displayed in the code editor. USE THIS! Else it will not work</pre>
                 <pre>Code Snippet: {(problem as {codeSnippet:string}).codeSnippet}</pre>
             </div>
             <div className='app__particular-info2'>
