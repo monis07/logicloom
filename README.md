@@ -12,7 +12,7 @@ I was looking for unique project idea to build after i finished learning TypeScr
 
 ## 👨‍💻 Local development
 
-That is pretty easy. Make sure u have <b>Git</b>,<b>Node.js</b>,<b>npm</b>,<b>MongoDB compass</b> and <b>Postman API</b> installed in your system.
+That is pretty easy. Make sure u have <b>Git</b>, <b>Node.js</b>, <b>npm</b>, <b>MongoDB compass</b> and <b>Postman API</b> installed in your system.
 
 First we will clone the repo in our local system
 
