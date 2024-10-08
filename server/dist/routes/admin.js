@@ -215,4 +215,8 @@ router.post('/submit/problems/execute/:id', middleware_1.default, (req, res) => 
     }
     res.status(200).send(finalresult);
 }));
+//cron job
+router.get('/cronjob', (req, res) => {
+    res.status(200).send("Cron job executed successfully");
+});
 exports.default = router;
