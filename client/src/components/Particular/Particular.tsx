@@ -55,7 +55,7 @@ function Particular(){
                     console.log(data)
                 }
             else{
-                alert("There is syntax,logical or runtime error in your code.Kindly fix it and try again!")
+                                alert("There is syntax,logical or runtime error in your code.Kindly fix it and try again!")
             }
                 setStatus("Submit");
         }

@@ -28,6 +28,7 @@ function Authentication(){
             <button onClick={handleSignin}>SignIn</button>
             <button onClick={handleSignup}>SignUp</button>
             </div>
+            <p>This app's backend is hosted on render.com which has policy of idling after 15 minutes of inactivity. Please wait for 30 seconds if u see any!</p>
         </div>
         </>
     )
