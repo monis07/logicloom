@@ -4,7 +4,7 @@ import jwt from 'jsonwebtoken'
 const SECRET = process.env.SECRET_KEY || 'secret';
 import authenticateJwt from '../middleware/middleware'
 import axios,{AxiosResponse}from 'axios'
-const router =express.Router();
+const router = express.Router();
 
 
 //Admin signup
@@ -229,4 +229,10 @@ router.post('/submit/problems/execute/:id', authenticateJwt,async (req, res) => 
         }  
          res.status(200).send(finalresult);        
     });
+
+//cron job
+router.get('/cronjob',(req:Request,res:Response)=>{
+  res.status(200).send("Cron job executed successfully")
+})
+
 export default router;
