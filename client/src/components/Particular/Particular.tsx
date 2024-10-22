@@ -51,7 +51,6 @@ function Particular(){
 
                 if(response.data.length>0){
                     setData(response.data)
-                    console.log("data aaya hai backend se")
                     console.log(data)
                 }
             else{

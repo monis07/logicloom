@@ -46,7 +46,6 @@ function Problems(){
 
 function Child(props:{title:string,difficulty:string,_id:string}){
     const id="/problems/"+props._id
-    // const enum colour{Easy="green",Medium="yellow",Hard="red"}
     return(
         <tr>
             <td><a href={id}>{props.title}</a></td>

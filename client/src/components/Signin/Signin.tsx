@@ -71,6 +71,7 @@ function Signin(){
     <p style={{color:'white',textAlign:"center"}}>Not a User? <a style={{textDecoration:"none",color:"#499bd6"}} href={"/signup"}> SignUp</a></p> 
         </div>
         <p className="app__signup-response" style={{color:"white"}}>{msg}</p>
+        
     </div>
     </>
     )
